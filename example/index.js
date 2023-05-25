@@ -1,5 +1,5 @@
 import express from 'express';
-import config from '../config';
+import config from './.config';
 import cors from 'cors';
 import expressAuth from '../src';
 import cookieParser from 'cookie-parser';
