@@ -1,0 +1,21 @@
+# Ignores
+## General
+.*
+*.bak
+
+## Stack
+node_modules
+/*.tgz
+
+# Excludes
+## General
+!.git*
+
+## Dev
+!.editorconfig
+!.eslint*
+/dist
+config.js
+
+## Stack
+!.npmignore
