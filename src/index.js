@@ -1,7 +1,7 @@
 import { map } from '@laufire/utils/collection';
 import passport from 'passport';
 import setupProvider from './setupProvider';
-import saveTokens from './saveTokens';
+import saveLogin from './saveLogin';
 
 const setupVerifier = () => {
 	// passport.use(new JwtStrategy({}))  idToken verification
@@ -11,15 +11,6 @@ const renewTokens = () => {
 };
 const logout = () => {};
 
-const saveLogin = async ({ user }, res) => {
-	const { idToken } = user;
-
-	await saveTokens(user);
-	res.cookie(
-		'token', idToken, { httpOnly: true, secure: true }
-	);
-	res.redirect('/');
-};
 const initVerifier = () => {
 	// req.cookies.currentProvider
 	// passport.authenticate('jwt', {failureRedirect: '/renewTokens', session: false })
