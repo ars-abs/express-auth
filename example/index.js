@@ -13,13 +13,11 @@ const app = express();
 app.use(cors({ origin: '*' }));
 app.use(cookieParser());
 
-app.get('/', (req, res) => {
-	res.send('homepage');
+app.get('/login', (req, res) => {
+	res.send('Login Page, please login');
 });
-
 expressAuth({ app, config });
-
-app.get('/protected', (req, res) => {
+app.get('/', (req, res) => {
 	res.json({ user: req.user });
 });
 app.listen(PORT);
