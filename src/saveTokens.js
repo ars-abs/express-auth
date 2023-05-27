@@ -1,13 +1,14 @@
-import jwt from 'jsonwebtoken';
 import User from './User';
 
-const saveTokens = async ({ idToken, refreshToken, accessToken }) => {
-	const { sub } = jwt.decode(idToken);
-
-	await User.create({
-		user: sub,
-		refreshToken: refreshToken,
-		accessToken: accessToken,
+const saveTokens = async ({ sub, iss, refreshToken, accessToken }) => {
+	await User.findOrCreate({
+		where: { user: sub },
+		defaults: {
+			user: sub,
+			iss: iss,
+			refreshToken: refreshToken,
+			accessToken: accessToken,
+		},
 	});
 };
 

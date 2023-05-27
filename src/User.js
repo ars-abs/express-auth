@@ -8,6 +8,7 @@ const db = new Sequelize({
 
 const User = db.define('user', {
 	user: DataTypes.STRING,
+	iss: DataTypes.STRING,
 	refreshToken: DataTypes.STRING,
 	accessToken: DataTypes.STRING,
 });
