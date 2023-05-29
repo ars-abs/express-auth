@@ -1,4 +1,4 @@
-import User from './User';
+import User from '../User';
 
 const saveTokens = async ({ sub, issuer, refreshToken, accessToken }) => {
 	await User.findOrCreate({
