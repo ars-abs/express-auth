@@ -15,8 +15,7 @@ const expressAuth = (context) => {
 
 	app.use(includeContextToReq(extendedContext));
 
-	map(providers, (...props) =>
-		setupAuthFlow({ props, ...extendedContext }));
+	map(providers, (...props) => setupAuthFlow({ props, ...extendedContext }));
 	setupVerifier();
 
 	app.get(`${ logoutURL }`, logout);
