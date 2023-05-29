@@ -9,20 +9,22 @@ process.env.PORT = 1234;
 process.env.URL = 'http://localhost';
 process.env.JWTSECRET = 'secretstring';
 
-const app = express();
+(async () => {
+	const app = express();
 
-app.use(cors({ origin: '*' }));
-app.use(cookieParser());
-const context = { app, config };
+	app.use(cors({ origin: '*' }));
+	app.use(cookieParser());
+	const context = { app, config };
 
-app.use(includeContextToReq(context));
-app.get('/login', (req, res) => {
-	res.send('Login Page, please login');
-});
-expressAuth(context);
-app.get('/', (req, res) => {
-	res.json({ user: req.user });
-});
-const { PORT } = process.env;
+	app.use(includeContextToReq(context));
+	app.get('/login', (req, res) => {
+		res.send('Login Page, please login');
+	});
+	await expressAuth(context);
+	app.get('/', (req, res) => {
+		res.json({ user: req.user });
+	});
+	const { PORT } = process.env;
 
-app.listen(PORT);
+	app.listen(PORT);
+})();
