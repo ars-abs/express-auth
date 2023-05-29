@@ -6,9 +6,8 @@ import cookieParser from 'cookie-parser';
 import includeContextToReq from './includeContextToReq';
 
 process.env.PORT = 1234;
-const { PORT } = process.env;
+process.env.URL = 'http://localhost';
 
-process.env.URL = `http://localhost:${ PORT }`;
 const app = express();
 
 app.use(cors({ origin: '*' }));
@@ -23,4 +22,6 @@ expressAuth(context);
 app.get('/', (req, res) => {
 	res.json({ user: req.user });
 });
+const { PORT } = process.env;
+
 app.listen(PORT);
