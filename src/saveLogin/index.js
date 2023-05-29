@@ -13,7 +13,7 @@ const saveLogin = async ({ user: { idToken, ...restTokens },
 			sub: sub,
 			iss: issuer,
 			role: 'user',
-		}, 'secret', { expiresIn: '1h' }
+		}, process.env.JWTSECRET, { expiresIn: '1h' }
 	);
 
 	await saveTokens({ ...restTokens, sub, issuer });

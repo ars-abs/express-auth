@@ -6,7 +6,7 @@ const cookieExtractor = (req) => (req && req.cookies ? req.cookies.token : '');
 const setupVerifier = () => {
 	passport.use('jwt', new JwtStrategy({
 		jwtFromRequest: ExtractJwt.fromExtractors([cookieExtractor]),
-		secretOrKey: 'secret',
+		secretOrKey: process.env.JWTSECRET,
 	}, (jwtPayload, done) => done(null, jwtPayload)));
 };
 

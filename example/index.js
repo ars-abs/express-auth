@@ -7,6 +7,7 @@ import includeContextToReq from './includeContextToReq';
 
 process.env.PORT = 1234;
 process.env.URL = 'http://localhost';
+process.env.JWTSECRET = 'secretstring';
 
 const app = express();
 
