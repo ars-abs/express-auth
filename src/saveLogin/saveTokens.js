@@ -1,7 +1,9 @@
-import User from '../User';
 
-const saveTokens = async ({ sub, issuer, refreshToken, accessToken }) => {
-	await User.findOrCreate({
+const saveTokens = async ({
+	config: { auth: { userSchema }},
+	data: { sub, issuer, refreshToken, accessToken },
+}) => {
+	await userSchema.findOrCreate({
 		where: { user: sub },
 		defaults: {
 			user: sub,

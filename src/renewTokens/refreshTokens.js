@@ -1,5 +1,4 @@
 import jwt from 'jsonwebtoken';
-import User from '../User';
 import fetchTokens from './fetchTokens';
 
 const refreshTokens = async (req) => {
@@ -7,7 +6,7 @@ const refreshTokens = async (req) => {
 	const {
 		tokenURL, clientID, clientSecret,
 	} = req.context.config.auth.providers[iss];
-	const [{ refreshToken }] = await User
+	const [{ refreshToken }] = await req.context.config.auth.userSchema
 		.findAll({ where: { user: sub, iss: iss }});
 
 	return fetchTokens({ refreshToken, tokenURL, clientID, clientSecret });

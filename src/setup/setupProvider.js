@@ -10,8 +10,9 @@ const cb = (
 
 const setupProvider = async ({ data: { provider, props }}) =>{
 	const {passportStrategy} = props
-	const {Strategy} = await import(`${ passportStrategy }`);
-	passport.use(`${provider}`, new Strategy({ ...props }, cb));
+	import(`${ passportStrategy }`).then(({Strategy}) => {
+		passport.use(`${provider}`, new Strategy({ ...props }, cb));
+	});
 };
 
 export default setupProvider;

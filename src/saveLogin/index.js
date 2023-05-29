@@ -2,8 +2,9 @@ import { findIndex } from '@laufire/utils/collection';
 import saveTokens from './saveTokens';
 import jwt from 'jsonwebtoken';
 
-const saveLogin = async ({ user: { idToken, ...restTokens },
-	context: { config: { auth: { providers }}}}, res, next) => {
+const saveLogin = async ({ user: { idToken, ...restTokens }, context },
+	res, next) => {
+	const { config: { auth: { providers }}} = context;
 	const { sub, iss } = jwt.decode(idToken);
 
 	const issuer = findIndex(providers,
@@ -16,7 +17,7 @@ const saveLogin = async ({ user: { idToken, ...restTokens },
 		}, process.env.JWTSECRET, { expiresIn: '1h' }
 	);
 
-	await saveTokens({ ...restTokens, sub, issuer });
+	await saveTokens({ ...context, data: { ...restTokens, sub, issuer }});
 	res.cookie(
 		'token', token, { httpOnly: true, secure: true }
 	);
