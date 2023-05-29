@@ -20,4 +20,4 @@ const expressAuth = (context) => {
 		{ failureRedirect: '/renewTokens', session: false }));
 };
 
-export default expressAuth;
+export { expressAuth };

@@ -1,7 +1,7 @@
 import express from 'express';
 import config from './.config';
 import cors from 'cors';
-import expressAuth from '../src';
+import { expressAuth } from '../dist';
 import cookieParser from 'cookie-parser';
 import includeContextToReq from './includeContextToReq';
 

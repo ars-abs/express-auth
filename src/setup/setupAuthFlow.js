@@ -1,6 +1,6 @@
 import passport from 'passport';
 import setupProvider from './setupProvider';
-import saveLogin from './saveLogin';
+import saveLogin from '../saveLogin';
 
 const setupAuthFlow = ({ props: [value, provider], ...context }) => {
 	const { app, config: { auth: { loginURL, callbackURL }}} = context;
