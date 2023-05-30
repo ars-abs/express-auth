@@ -7,11 +7,16 @@ import logout from './logout';
 import setupAuthFlow from './setup/setupAuthFlow';
 import getUserSchema from './getUserSchema';
 import includeContextToReq from './includeContextToReq';
+import normalizeRepo from './normalizeRepo';
 
 const expressAuth = (context) => {
-	const { app, config: { auth: { providers, logoutURL }}} = context;
-	const userSchema = getUserSchema(context);
-	const extendedContext = merge(context, { config: { auth: { userSchema }}});
+	const normalizedContext = merge(context, {
+		config: { auth: { repo: normalizeRepo(context) }},
+	});
+	const extendedContext = merge(normalizedContext, {
+		config: { auth: { userSchema: getUserSchema(normalizedContext) }},
+	});
+	const { app, config: { auth: { providers, logoutURL }}} = extendedContext;
 
 	app.use(includeContextToReq(extendedContext));
 
