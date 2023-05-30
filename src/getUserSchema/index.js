@@ -1,9 +1,7 @@
 import { DataTypes } from 'sequelize';
-import repoTypes from './repoTypes';
 
-const getUserSchema = ({ config: { auth: { repo }}}) => {
-	const db = repoTypes[repo.type](repo);
-
+const getUserSchema = ({ repos, config: { auth: { repo }}}) => {
+	const db = repos[repo];
 	const User = db.define('user', {
 		user: DataTypes.STRING,
 		iss: DataTypes.STRING,
@@ -11,7 +9,7 @@ const getUserSchema = ({ config: { auth: { repo }}}) => {
 		accessToken: DataTypes.STRING,
 	});
 
-	User.sync();
+	User.sync({ alter: true });
 
 	return User;
 };

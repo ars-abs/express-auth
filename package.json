@@ -4,10 +4,9 @@
   "description": "",
   "main": "./index.js",
   "scripts": {
-    "start": "npm run build && npm run dev",
+    "start": "npm run build",
     "test": "jest --no-cache",
     "build": "rm -rf ./dist && babel --ignore '**/*.spec.js' -d ./dist ./src && npm run copy",
-    "dev": "cd example && pnpm start",
     "prepareDist": "npm run lint && npm test && npm run build",
     "dist": "npm run prepareDist && cd dist && npm publish --access public && cd ..",
     "copy": "cp ./package.json ./ReadMe.md ./LICENSE ./dist/",
