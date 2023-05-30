@@ -8,11 +8,13 @@ import setupAuthFlow from './setup/setupAuthFlow';
 import getUserSchema from './getUserSchema';
 import includeContextToReq from './includeContextToReq';
 import normalizeRepo from './normalizeRepo';
+import normalizeProviders from './normalizeProviders';
 
 const expressAuth = (context) => {
-	const normalizedContext = merge(context, {
-		config: { auth: { repo: normalizeRepo(context) }},
-	});
+	const normalizedContext = merge(context, { config: { auth: {
+		repo: normalizeRepo(context),
+		providers: normalizeProviders(context),
+	}}});
 	const extendedContext = merge(normalizedContext, {
 		config: { auth: { userSchema: getUserSchema(normalizedContext) }},
 	});
