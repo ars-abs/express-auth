@@ -1,12 +1,13 @@
 import jwt from 'jsonwebtoken';
 import fetchTokens from './fetchTokens';
 
-const refreshTokens = async (req, res) => {
-	const { sub, iss } = jwt.decode(req.cookies.token);
-	const {
-		tokenURL, clientID, clientSecret,
-	} = req.context.config.auth.providers[iss];
-	const user = (await req.context.config.auth.userSchema
+const refreshTokens = async ({
+	cookies: { token },
+	context: { config: { auth: { providers, userSchema, loginURL }}},
+}, res) => {
+	const { sub, iss } = jwt.decode(token);
+	const { tokenURL, clientID, clientSecret } = providers[iss];
+	const user = (await userSchema
 		.findAll({ where: { user: sub, iss: iss }}))[0];
 
 	return user
@@ -14,7 +15,7 @@ const refreshTokens = async (req, res) => {
 		? fetchTokens({
 			refreshToken: user.refreshToken, tokenURL, clientID, clientSecret,
 		})
-		: res.redirect('/login');
+		: res.redirect(loginURL);
 };
 
 export default refreshTokens;

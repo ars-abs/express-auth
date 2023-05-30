@@ -1,6 +1,6 @@
-const logout = (req, res) => {
+const logout = ({ context: { config: { auth: { loginURL }}}}, res) => {
 	res.clearCookie('token');
-	res.redirect('/login');
+	res.redirect(loginURL);
 };
 
 export default logout;
