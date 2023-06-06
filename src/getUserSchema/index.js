@@ -5,8 +5,8 @@ const getUserSchema = ({ repos, config: { auth: { repo }}}) => {
 	const User = db.define('user', {
 		user: DataTypes.STRING,
 		iss: DataTypes.STRING,
-		refreshToken: DataTypes.STRING,
-		accessToken: DataTypes.STRING,
+		refreshToken: DataTypes.TEXT,
+		accessToken: DataTypes.TEXT,
 	});
 
 	User.sync({ alter: true });
