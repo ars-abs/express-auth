@@ -12,15 +12,13 @@ import normalizeProviders from './normalizeProviders';
 const expressAuth = (context) => {
 	const normalizedContext = merge(context, { config: { auth: {
 		providers: normalizeProviders(context),
+		userSchema: getUserSchema(context),
 	}}});
-	const extendedContext = merge(normalizedContext, {
-		config: { auth: { userSchema: getUserSchema(normalizedContext) }},
-	});
-	const { app, config: { auth: { providers, logoutURL }}} = extendedContext;
+	const { app, config: { auth: { providers, logoutURL }}} = normalizedContext;
 
-	app.use(includeContextToReq(extendedContext));
-
-	map(providers, (...props) => setupAuthFlow({ props, ...extendedContext }));
+	app.use(includeContextToReq(normalizedContext));
+	map(providers, (...props) =>
+		setupAuthFlow({ props, ...normalizedContext }));
 	setupVerifier();
 
 	app.get(`${ logoutURL }`, logout);
