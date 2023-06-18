@@ -1,10 +1,9 @@
 import passport from 'passport';
-import saveLogin from './saveLogin';
 import setupVerifier from './setup/setupVerifier';
-import renewTokens from './renewTokens';
 import enrichContext from './enrichContext';
 import setupAuthFlows from './setup/setupAuthFlows';
 import setupLogout from './setup/setupLogout';
+import setupRenewTokens from './setup/setupRenewTokens';
 
 const expressAuth = (context) => {
 	const enrichedContext = enrichContext(context);
@@ -13,9 +12,7 @@ const expressAuth = (context) => {
 	setupAuthFlows(enrichedContext);
 	setupVerifier();
 	setupLogout(enrichedContext);
-	app.get(
-		'/renewTokens', renewTokens, saveLogin, (req, res) => res.redirect('/')
-	);
+	setupRenewTokens(enrichedContext);
 	app.use(passport.authenticate('jwt',
 		{ failureRedirect: '/renewTokens', session: false }));
 };
