@@ -1,6 +1,6 @@
 import { DataTypes } from 'sequelize';
 
-const getUserSchema = ({ repos, config: { auth: { repo }}}) => {
+const buildUserSchema = ({ repos, config: { auth: { repo }}}) => {
 	const db = repos[repo];
 	const User = db.define('user', {
 		user: DataTypes.STRING,
@@ -14,4 +14,4 @@ const getUserSchema = ({ repos, config: { auth: { repo }}}) => {
 	return User;
 };
 
-export default getUserSchema;
+export default buildUserSchema;
