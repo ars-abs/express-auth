@@ -6,7 +6,7 @@ import renewTokens from './renewTokens';
 import logout from './logout';
 import setupAuthFlow from './setup/setupAuthFlow';
 import getUserSchema from './getUserSchema';
-import includeContextToReq from './includeContextToReq';
+import enrichReq from './enrichReq';
 import normalizeProviders from './normalizeProviders';
 
 const expressAuth = (context) => {
@@ -16,7 +16,7 @@ const expressAuth = (context) => {
 	}}});
 	const { app, config: { auth: { providers, logoutURL }}} = normalizedContext;
 
-	app.use(includeContextToReq(normalizedContext));
+	app.use(enrichReq(normalizedContext));
 	map(providers, (...props) =>
 		setupAuthFlow({ props, ...normalizedContext }));
 	setupVerifier();
