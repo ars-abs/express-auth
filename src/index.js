@@ -1,24 +1,18 @@
-import { map, merge } from '@laufire/utils/collection';
+import { map } from '@laufire/utils/collection';
 import passport from 'passport';
 import saveLogin from './saveLogin';
 import setupVerifier from './setup/setupVerifier';
 import renewTokens from './renewTokens';
 import logout from './logout';
 import setupAuthFlow from './setup/setupAuthFlow';
-import getUserSchema from './getUserSchema';
-import enrichReq from './enrichReq';
-import normalizeProviders from './normalizeProviders';
+import enrichContext from './enrichContext';
 
 const expressAuth = (context) => {
-	const normalizedContext = merge(context, { config: { auth: {
-		providers: normalizeProviders(context),
-		userSchema: getUserSchema(context),
-	}}});
-	const { app, config: { auth: { providers, logoutURL }}} = normalizedContext;
+	const enrichedContext = enrichContext(context);
+	const { app, config: { auth: { providers, logoutURL }}} = enrichedContext;
 
-	app.use(enrichReq(normalizedContext));
 	map(providers, (...props) =>
-		setupAuthFlow({ props, ...normalizedContext }));
+		setupAuthFlow({ props, ...enrichedContext }));
 	setupVerifier();
 
 	app.get(`${ logoutURL }`, logout);
