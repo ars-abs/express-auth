@@ -2,18 +2,17 @@ import passport from 'passport';
 import saveLogin from './saveLogin';
 import setupVerifier from './setup/setupVerifier';
 import renewTokens from './renewTokens';
-import logout from './logout';
 import enrichContext from './enrichContext';
 import setupAuthFlows from './setup/setupAuthFlows';
+import setupLogout from './setup/setupLogout';
 
 const expressAuth = (context) => {
 	const enrichedContext = enrichContext(context);
-	const { app, config: { auth: { logoutURL }}} = enrichedContext;
+	const { app } = enrichedContext;
 
 	setupAuthFlows(enrichedContext);
 	setupVerifier();
-
-	app.get(`${ logoutURL }`, logout);
+	setupLogout(enrichedContext);
 	app.get(
 		'/renewTokens', renewTokens, saveLogin, (req, res) => res.redirect('/')
 	);
