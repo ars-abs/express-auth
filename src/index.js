@@ -1,3 +1,4 @@
+import 'module-alias/register';
 import enrichContext from './enrichContext';
 import setupRequestParsers from './setup/setupRequestParsers';
 import setupAuthFlows from './setup/setupAuthFlows';
