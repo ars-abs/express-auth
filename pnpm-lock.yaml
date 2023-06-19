@@ -12,6 +12,7 @@ specifiers:
   babel-core: ^7.0.0-bridge.0
   babel-eslint: ^10.0.3
   babel-jest: ^24.9.0
+  cookie-parser: ^1.4.6
   eslint: ^5.16.0
   express: ^4.18.2
   jest: ^24.9.0
@@ -31,6 +32,7 @@ specifiers:
 dependencies:
   '@laufire/utils': 3.0.0-0
   axios: 1.4.0
+  cookie-parser: 1.4.6
   express: 4.18.2
   jsonwebtoken: 9.0.0
   passport: 0.6.0
@@ -2251,8 +2253,21 @@ packages:
     resolution: {integrity: sha512-ASFBup0Mz1uyiIjANan1jzLQami9z1PoYSZCiiYW2FczPbenXc45FZdBZLzOT+r6+iciuEModtmCti+hjaAk0A==}
     dev: true
 
+  /cookie-parser/1.4.6:
+    resolution: {integrity: sha512-z3IzaNjdwUC2olLIB5/ITd0/setiaFMLYiZJle7xg5Fe9KWAceil7xszYfHHBtDFYLSgJduS2Ty0P1uJdPDJeA==}
+    engines: {node: '>= 0.8.0'}
+    dependencies:
+      cookie: 0.4.1
+      cookie-signature: 1.0.6
+    dev: false
+
   /cookie-signature/1.0.6:
     resolution: {integrity: sha512-QADzlaHc8icV8I7vbaJXJwod9HWYp8uCqf1xa4OfNu1T7JVxQIrUgOWtHdNDtPiywmFbiS12VjotIXLrKM3orQ==}
+    dev: false
+
+  /cookie/0.4.1:
+    resolution: {integrity: sha512-ZwrFkGJxUR3EIoXtO+yVE69Eb7KlixbaeAWfBQB9vVsNn/o+Yw69gBWSSDK825hQNdN+wF8zELf3dFNl/kxkUA==}
+    engines: {node: '>= 0.6'}
     dev: false
 
   /cookie/0.5.0:
