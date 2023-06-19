@@ -18,6 +18,7 @@ specifiers:
   jest: ^24.9.0
   jest-cli: ^24.9.0
   jsonwebtoken: ^9.0.0
+  module-alias: ^2.2.3
   passport: ^0.6.0
   passport-azure-ad-oauth2: ^0.0.4
   passport-facebook: ^3.0.0
@@ -35,6 +36,7 @@ dependencies:
   cookie-parser: 1.4.6
   express: 4.18.2
   jsonwebtoken: 9.0.0
+  module-alias: 2.2.3
   passport: 0.6.0
   passport-azure-ad-oauth2: 0.0.4
   passport-facebook: 3.0.0
@@ -4386,6 +4388,10 @@ packages:
     dependencies:
       minimist: 1.2.8
     dev: true
+
+  /module-alias/2.2.3:
+    resolution: {integrity: sha512-23g5BFj4zdQL/b6tor7Ji+QY4pEfNH784BMslY9Qb0UnJWRAt+lQGLYmRaM0KDBwIG23ffEBELhZDP2rhi9f/Q==}
+    dev: false
 
   /moment-timezone/0.5.43:
     resolution: {integrity: sha512-72j3aNyuIsDxdF1i7CEgV2FfxM1r6aaqJyLB2vwb33mXYyoyLly+F1zbWqhA3/bVIoJ4szlUoMbUnVdid32NUQ==}
