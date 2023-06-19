@@ -4,11 +4,13 @@ import enrichContext from './enrichContext';
 import setupAuthFlows from './setup/setupAuthFlows';
 import setupLogout from './setup/setupLogout';
 import setupRenewTokens from './setup/setupRenewTokens';
+import setupRequestParsers from './setup/setupRequestParsers';
 
 const expressAuth = (context) => {
 	const enrichedContext = enrichContext(context);
 	const { app } = enrichedContext;
 
+	setupRequestParsers(enrichedContext);
 	setupAuthFlows(enrichedContext);
 	setupVerifier();
 	setupLogout(enrichedContext);
